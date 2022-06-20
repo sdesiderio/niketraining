@@ -53,7 +53,20 @@ public class ClienteServiceImpl implements ClienteService {
 	public Cliente updateCliente(Cliente cli,String id) {
 		if(isValidId(id)) {
 			cli.setPartitaIva(id);
-			return clienteRepository.save(cli);
+			Cliente clienteToUpdate = findByPartitaIva(id);
+			clienteToUpdate.setRagioneSociale(cli.getRagioneSociale());
+			clienteToUpdate.setIndirizzo(cli.getIndirizzo());
+			clienteToUpdate.setNCivico(cli.getNCivico());
+			clienteToUpdate.setCitta(cli.getCitta());
+			clienteToUpdate.setProvincia(cli.getProvincia());
+			clienteToUpdate.setCap(cli.getCap());
+			clienteToUpdate.setStato(cli.getStato());
+			clienteToUpdate.setPartitaIva(cli.getPartitaIva());
+			clienteToUpdate.setCodiceFiscale(cli.getCodiceFiscale());
+			clienteToUpdate.setCodiceInterscambio(cli.getCodiceInterscambio());
+			clienteToUpdate.setPec(cli.getPec());
+			
+			return clienteRepository.save(clienteToUpdate);
 		}return null;
 	}
 	

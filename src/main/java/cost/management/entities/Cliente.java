@@ -33,7 +33,7 @@ public class Cliente implements Serializable {
 	
 	//private String numeroCivico;
 	@Column(name = "n_civico")
-	private String numeroCivico;
+	private String nCivico;
 	
 
 	@Id
@@ -126,12 +126,12 @@ public class Cliente implements Serializable {
 	}
 
 
-	public String getNumeroCivico() {
-		return numeroCivico;
+	public String getNCivico() {
+		return this.nCivico;
 	}
 
-	public void setNumeroCivico(String numeroCivico) {
-		this.numeroCivico = numeroCivico;
+	public void setNCivico(String numeroCivico) {
+		this.nCivico = numeroCivico;
 	}
 
 	public String getPec() {
