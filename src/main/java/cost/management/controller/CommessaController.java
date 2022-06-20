@@ -50,6 +50,26 @@ public class CommessaController {
 		System.out.println("INSIDE FIND ALL COMMESSE");
 		return commessaService.findAll();
 	}
+	
+	@GetMapping("/commesse/{codice}")
+	public Commessa findByCodice(@PathVariable String codice) {
+		return commessaService.findByCodice(codice);
+		
+	}
+	
+	@GetMapping("/commesse/codice/{codice}")
+	public List<Commessa> findByCodiceContaining(@PathVariable String codice) {
+		return commessaService.findByCodiceContaining(codice);
+	}
+	@GetMapping("/commesse/dc/{dc}")
+	public List<Commessa> findByDescrizioneCommessaContaining(@PathVariable String dc) {
+		return commessaService.findByDescrizioneCommessaContaining(dc);
+	}
+	
+	@GetMapping("/commesse/tc/{tc}")
+	public List<Commessa> findByTipologiaCommessaContaining(@PathVariable String tc) {
+		return commessaService.findByTipologiaCommessaContaining(tc);
+	}
 	@PutMapping("/commesse/{codice}")
 	public Commessa archiveCommessa(@PathVariable String codice) {
 		return commessaService.archiveCommessa(codice);
