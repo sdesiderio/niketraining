@@ -19,9 +19,11 @@ public interface CommessaService {
 
 	Commessa addCommessa(Commessa com);
 
-	Commessa updateCommessa(Commessa com, String id);
+	Commessa updateCommessa(Commessa com, String codice);
 
 	Commessa archiveCommessa(String codice);
+	
+	void deleteCommessa(String id);
 
 	
 
