@@ -6,22 +6,22 @@ import cost.management.entities.Cliente;
 
 public interface ClienteService {
 
-	Cliente findByPartitaIva(String partitaIva);
-	List<Cliente> findByPartitaIvaContaining(String partitaIva);
+	Cliente trovaPerPartitaIva(String partitaIva);
+	List<Cliente> trovaPerPartitaIvaContenente(String partitaIva);
 	
-	List<Cliente> findByRagioneSocialeContaining(String ragioneSociale);
+	List<Cliente> trovaPerRagioneSocialeContenente(String ragioneSociale);
 	
-	List<Cliente> findAll();
+	List<Cliente> trovaTuttiClienti();
 	
-	List<Cliente> findByCodiceFiscaleContaining(String cf);
+	List<Cliente> trovaPerCodiceFiscaleContenente(String codiceFiscale);
 
-	List<Cliente> findByCodiceInterscambioContaining(String ci);
-	List<Cliente> findByPecContaining(String pec);
+	List<Cliente> trovaPerCodiceInterscambioContenente(String codiceInterscambio);
+	List<Cliente> trovaPerPecContenente(String pec);
 
-	Cliente addCliente(Cliente cli);
+	Cliente inserisciCliente(Cliente cliente);
 
-	Cliente updateCliente(Cliente cli, String id);
+	Cliente aggiornaCliente(Cliente cliente, String id);
 
-	Cliente archiveCliente(String id);
+	Cliente archiviaCliente(String id);
 
 }

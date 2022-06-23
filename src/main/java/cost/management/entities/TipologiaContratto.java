@@ -2,6 +2,10 @@ package cost.management.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,8 +27,9 @@ public class TipologiaContratto implements Serializable {
 	private String tipologia;
 
 	//bi-directional many-to-one association to Contratto
+	@JsonIgnore
 	@OneToMany(mappedBy="tipologiaContrattoBean")
-	private List<Contratto> contratti;
+	private List<Contratto> contratti = new ArrayList<>();
 
 	public TipologiaContratto() {
 	}

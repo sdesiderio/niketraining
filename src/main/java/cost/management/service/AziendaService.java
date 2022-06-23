@@ -6,10 +6,10 @@ import cost.management.entities.Azienda;
 
 public interface AziendaService {
 
-	List<Azienda> findAllAziende();
+	List<Azienda> trovaTutteAziende();
 
-	Azienda findAziendaById(String id);
+	Azienda trovaAziendaPerId(String id);
 
-	Azienda findAziendaByNome(String aziendaNome);
+	Azienda trovaAziendaPerNome(String aziendaNome);
 
 }

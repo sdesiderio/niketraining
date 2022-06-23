@@ -15,12 +15,12 @@ public class LoginServiceImpl implements LoginService {
 	private LoginRepository loginRepository;
 	
 	@Override
-	public Utente addUtente(Utente utente) {
+	public Utente inserisciUtente(Utente utente) {
 		return loginRepository.save(utente);
 	}
 	
 	@Override
-	public Utente finUtenteByEmail(String email) {
+	public Utente trovaUtentePerEmail(String email) {
 		Optional<Utente> utenteOptional = loginRepository.findById(email);
 		if (utenteOptional.isPresent()) {
 			return utenteOptional.get();

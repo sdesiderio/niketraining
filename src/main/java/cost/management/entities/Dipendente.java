@@ -3,8 +3,10 @@ package cost.management.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,8 +59,9 @@ public class Dipendente implements Serializable {
 	
 
 	//bi-directional many-to-one association to Contratto
+	@JsonIgnore
 	@OneToMany(mappedBy="dipendente")
-	private List<Contratto> contratti;
+	private List<Contratto> contratti = new ArrayList<>();
 
 	//bi-directional many-to-one association to Azienda
 	@ManyToOne

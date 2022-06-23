@@ -17,16 +17,16 @@ import cost.management.repository.DipendenteRepository;
 public class DipendenteCommessaServiceImpl implements DipendenteCommessaService {
 	
 	@Autowired
-	private DipendenteCommessaRepository dipCommRepo;
+	private DipendenteCommessaRepository dipendenteCommessaRepository;
 	
 	@Autowired
-	private CommessaRepository commessaRepo;
+	private CommessaRepository commessaRepository;
 	
 	@Autowired
-	private DipendenteRepository dipRepo;
+	private DipendenteRepository dipendenteRepository;
 	
 	
-	public DipendenteCommessa addDipendenteCommessa(DipendenteCommessa dipendenteCommessa) {
+	public DipendenteCommessa inserisciDipendenteCommessa(DipendenteCommessa dipendenteCommessa) {
 
 		System.out.println("FULL OBJ :" + dipendenteCommessa.toString());
 		//System.out.println("IMPORTO :"+ importo);
@@ -39,13 +39,13 @@ public class DipendenteCommessaServiceImpl implements DipendenteCommessaService 
 		/*if (dipendenteFindByCF == null && (commessaFindByCodice == null || (commessaFindByCodice.getTipologiaCommessa() == "Produzione" 
 				&& commessaFindByCodice.getTipologiaCommessa()=="Time Material")))*/
 		//System.out.println(dipendenteCommessa.getId().toString());
-		String dipendenteCodiceFiscale = dipCommRepo.findCF(dipendenteCommessa.getId().getDipendenteCodiceFiscale(),dipendenteCommessa.getId().getCommessaCodice() );
+		String dipendenteCodiceFiscale = dipendenteCommessaRepository.findCF(dipendenteCommessa.getId().getDipendenteCodiceFiscale(),dipendenteCommessa.getId().getCommessaCodice() );
 		//if (dipendenteFindByCF.getCodiceFiscale() != dipendenteCommessa.getId().getDipendenteCodiceFiscale()) {
 		System.out.println("dipendenteCodiceFiscale : "+ dipendenteCodiceFiscale);
 		if( dipendenteCodiceFiscale == null ) {
 			System.out.println("INSIDE IF: ");
 			try {
-				return dipCommRepo.save(dipendenteCommessa);
+				return dipendenteCommessaRepository.save(dipendenteCommessa);
 			} catch (IllegalArgumentException ex) {
 				//log.info(message);
 				ex.printStackTrace();

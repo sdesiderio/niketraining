@@ -3,6 +3,7 @@ package cost.management.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -46,6 +47,7 @@ public class Contratto implements Serializable {
 	private Dipendente dipendente;
 
 	//bi-directional many-to-one association to TipologiaContratto
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="tipologia_contratto")
 	private TipologiaContratto tipologiaContrattoBean;

@@ -15,16 +15,16 @@ import cost.management.repository.AziendaRepository;
 public class AziendaServiceImpl implements AziendaService {
 	
 	@Autowired
-	private AziendaRepository aziendaRepo;
+	private AziendaRepository aziendaRepository;
 	
 	
 	Logger log = org.slf4j.LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public List<Azienda> findAllAziende(){
+	public List<Azienda> trovaTutteAziende(){
 		
 		List<Azienda> listaAziende = new ArrayList<>();
-		listaAziende = aziendaRepo.findAll();
+		listaAziende = aziendaRepository.findAll();
 		//System.out.println("@@@@@@@ AZIENDA NOME FORM PORPERTIES :"+ aziendaNome);
 		if(!listaAziende.isEmpty()) {
 			
@@ -40,16 +40,16 @@ public class AziendaServiceImpl implements AziendaService {
 	}
 
 	@Override
-	public Azienda findAziendaById(String id) {
+	public Azienda trovaAziendaPerId(String id) {
 		// TODO Auto-generated method stub
-		log.info("AZIENDA ID ************* "+ aziendaRepo.findById(Integer.parseInt(id)).get());
-		return aziendaRepo.findById(Integer.parseInt(id)).get();
+		log.info("AZIENDA ID ************* "+ aziendaRepository.findById(Integer.parseInt(id)).get());
+		return aziendaRepository.findById(Integer.parseInt(id)).get();
 	}
 
 	@Override
-	public Azienda findAziendaByNome(String aziendaNome) {
+	public Azienda trovaAziendaPerNome(String aziendaNome) {
 		//System.out.println("################## "+ aziendaRepo.findAziendaByNome(aziendaNome));
-		return aziendaRepo.findAziendaByNome(aziendaNome);
+		return aziendaRepository.findAziendaByNome(aziendaNome);
 	}
 	
 }

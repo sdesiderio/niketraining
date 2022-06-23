@@ -4,8 +4,8 @@ import cost.management.entities.Utente;
 
 public interface LoginService {
 
-	Utente addUtente(Utente utente);
+	Utente inserisciUtente(Utente utente);
 
-	Utente finUtenteByEmail(String email);
+	Utente trovaUtentePerEmail(String email);
 
 }

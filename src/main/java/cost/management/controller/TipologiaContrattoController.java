@@ -18,31 +18,31 @@ import cost.management.service.TipologiaContrattoService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api")
+@RequestMapping("/api/tipologia-contratto-service")
 public class TipologiaContrattoController {
 	
 	@Autowired
 	private TipologiaContrattoService tipologiaContrattoService;
 	
-	@PostMapping("/addTipologia")
-	public boolean addTipologiaContratto(@RequestBody TipologiaContratto contratto)
+	@PostMapping("/tipologie-contratto")
+	public boolean inserisciTipologiaContatto(@RequestBody TipologiaContratto contratto)
 	{
 		//DONE  controllo se tipologia di contratto gia esiste su db (con findALL)  return boolean
-		List<TipologiaContratto> contrattos = tipologiaContrattoService.findAllContratto();
-		for (TipologiaContratto tipologiaContratto : contrattos) {
+		List<TipologiaContratto> contratti = tipologiaContrattoService.trovaTuttiContratti();
+		for (TipologiaContratto tipologiaContratto : contratti) {
 			if (tipologiaContratto.getTipologia().equals(contratto.getTipologia())) {
 				return false;
 			}
 		}
-		tipologiaContrattoService.addTipologiaContatto(contratto);
+		tipologiaContrattoService.inserisciTipologiaContatto(contratto);
 		return true;
 	}
 
 	
-	@GetMapping("/get_tipologie")
+	@GetMapping("/tipologie-contratto")
 	public List<TipologiaContratto> findAllTipologiaContrattos()
 	{
-		return tipologiaContrattoService.findAllContratto();
+		return tipologiaContrattoService.trovaTuttiContratti();
 	}
 
 }

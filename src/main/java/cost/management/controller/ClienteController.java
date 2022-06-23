@@ -23,7 +23,7 @@ import cost.management.service.ClienteService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200" )
-@RequestMapping("/api")
+@RequestMapping("/api/cliente-service")
 //@Validated
 public class ClienteController {
 	Logger logger=LogManager.getLogger(ClienteController.class);
@@ -31,53 +31,53 @@ public class ClienteController {
 	private ClienteService clienteService;
 	
 	@GetMapping("/clienti/{partitaIva}")
-	public Cliente findByPartitaIva(@Valid @PathVariable String partitaIva) {
-		return clienteService.findByPartitaIva(partitaIva);
+	public Cliente trovaPerPartitaIva(@Valid @PathVariable String partitaIva) {
+		return clienteService.trovaPerPartitaIva(partitaIva);
 	}
-	@GetMapping("/clienti/pi/{pi}")
-	public List<Cliente> findByPartitaIvaContaining(@PathVariable String pi) {
+	@GetMapping("/clienti/partita-iva/{partitaIva}")
+	public List<Cliente> trovaPerPartitaIvaContenente(@PathVariable String partitaIva) {
 		
-		List<Cliente> list=clienteService.findByPartitaIvaContaining(pi);
-		logger.info("--------calledgetpi  "+list.size());
-		return clienteService.findByPartitaIvaContaining(pi);
+		List<Cliente> listaClienti=clienteService.trovaPerPartitaIvaContenente(partitaIva);
+		logger.info("--------calledgetpi  "+listaClienti.size());
+		return clienteService.trovaPerPartitaIvaContenente(partitaIva);
 	}
-	@GetMapping("/clienti/cf/{cf}")
-	public List<Cliente> findByCodiceFiscaleContaining(@PathVariable String cf) {
-		return clienteService.findByCodiceFiscaleContaining(cf);
+	@GetMapping("/clienti/codice-fiscale/{codiceFiscale}")
+	public List<Cliente> trovaPerCodiceFiscaleContenente(@PathVariable String codiceFiscale) {
+		return clienteService.trovaPerCodiceFiscaleContenente(codiceFiscale);
 	}
 	
-	@GetMapping("/clienti/ci/{ci}")
-	public List<Cliente> findByCodiceInterscambioContaining(@PathVariable String ci) {
-		return clienteService.findByCodiceInterscambioContaining(ci);
+	@GetMapping("/clienti/codice-interscamio/{codiceInterscambio}")
+	public List<Cliente> trovaPerCodiceInterscambioContenente(@PathVariable String codiceInterscambio) {
+		return clienteService.trovaPerCodiceInterscambioContenente(codiceInterscambio);
 	}
 	@GetMapping("/clienti/pec/{pec}")
-	public List<Cliente> findByPecContaining(@PathVariable String pec) {
-		return clienteService.findByPecContaining(pec);
+	public List<Cliente> trovaPerPecContenente(@PathVariable String pec) {
+		return clienteService.trovaPerPecContenente(pec);
 	}
 	
-	@GetMapping("/clienti/rs/{rs}")
-	public List<Cliente> findByRagioneSocialeContaining(@PathVariable String rs) {
-		return clienteService.findByRagioneSocialeContaining(rs);
+	@GetMapping("/clienti/ragione-sociale/{ragioneSociale}")
+	public List<Cliente> trovaPerRagioneSocialeContenente(@PathVariable String ragioneSociale) {
+		return clienteService.trovaPerRagioneSocialeContenente(ragioneSociale);
 	}
 	@GetMapping("/clienti")
-	public List<Cliente> findAll(){
+	public List<Cliente> trovaTutti(){
 		logger.info("----------lista");
-		return clienteService.findAll();	
+		return clienteService.trovaTuttiClienti();	
 	}
 	
 	@PostMapping("/clienti")
-	public Cliente addCliente(@Valid @RequestBody Cliente cli) {
+	public Cliente inserisciCliente(@Valid @RequestBody Cliente cliente) {
 		logger.info("----------add");
-		return clienteService.addCliente(cli);
+		return clienteService.inserisciCliente(cliente);
 	}
 	
 	@PutMapping("/clienti/{partitaIva}")
-	public Cliente updateCliente(@Valid @RequestBody Cliente cli,@PathVariable String partitaIva) {
-		return clienteService.updateCliente(cli,partitaIva);
+	public Cliente aggiornaCliente(@Valid @RequestBody Cliente cliente,@PathVariable String partitaIva) {
+		return clienteService.aggiornaCliente(cliente,partitaIva);
 	}
 		
 	@PutMapping("/clientiToArchive/{partitaIva}")
-	public Cliente archiveCliente(@Valid @PathVariable String partitaIva) {
-		return clienteService.archiveCliente(partitaIva);
+	public Cliente archiviaCliente(@Valid @PathVariable String partitaIva) {
+		return clienteService.archiviaCliente(partitaIva);
 	}
 }

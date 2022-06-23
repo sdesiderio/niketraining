@@ -15,6 +15,7 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cost.management.entities.Azienda;
 import cost.management.entities.Dipendente;
@@ -24,29 +25,29 @@ import cost.management.repository.DipendenteRepository;
 @Service
 public class DipendenteServiceImpl implements DipendenteService {
 
-	Logger log = org.slf4j.LoggerFactory.getLogger(this.getClass());
+	Logger log = LoggerFactory.getLogger(this.getClass());
 
 	// inietta il repository nel service
 	@Autowired
-	private DipendenteRepository dipRepo;
+	private DipendenteRepository dipendenteRepository;
 
 	@Autowired
-	private AziendaRepository aziendaRepo;
+	private AziendaRepository aziendaRepository;
 
 	// aggiungi dipendente
 	@Override
-	public Dipendente addDipendente(Dipendente dipendente, int id) {
+	public Dipendente inserisciDipendente(Dipendente dipendente, int id) {
 
 		String message = "Dipendente NON INSERITO!!";
 		String codiceFiscale = dipendente.getCodiceFiscale();
-		Dipendente dipendenteFindByCF = dipRepo.findByCodiceFiscale(codiceFiscale);
+		Dipendente dipendenteFindByCF = dipendenteRepository.findByCodiceFiscale(codiceFiscale);
 		if (dipendenteFindByCF == null) {
-			Azienda azienda = aziendaRepo.findById(id).get();
+			Azienda azienda = aziendaRepository.findById(id).get();
 			dipendente.setAzienda(azienda);
 			dipendente.setCreateDate(new Date());
 
 			try {
-				return dipRepo.save(dipendente);
+				return dipendenteRepository.save(dipendente);
 			} catch (IllegalArgumentException ex) {
 				log.info(message);
 				ex.printStackTrace();
@@ -58,31 +59,31 @@ public class DipendenteServiceImpl implements DipendenteService {
 	}
 	
 	@Override
-	public Dipendente updateDipendente(Dipendente dipendente, String codiceFiscale, int aziendaId) {
+	public Dipendente aggiornaDipendente(Dipendente dipendente, String codiceFiscale, int aziendaId) {
 
-		Dipendente oldDipendente = null;
+		Dipendente vecchioDipendente = null;
 
-		Optional<Dipendente> oldDipendenteTemp = dipRepo.findById(codiceFiscale);
+		Optional<Dipendente> vecchioDipendenteTemp = dipendenteRepository.findById(codiceFiscale);
 
-		if (oldDipendenteTemp.isPresent()) {
-			oldDipendente = oldDipendenteTemp.get();
+		if (vecchioDipendenteTemp.isPresent()) {
+			vecchioDipendente = vecchioDipendenteTemp.get();
 
 			//oldDipendente.setCodiceFiscale(dipendente.getCodiceFiscale());
-			oldDipendente.setAzienda(dipendente.getAzienda());
-			oldDipendente.setNome(dipendente.getNome());
-			oldDipendente.setCognome(dipendente.getCognome());
-			oldDipendente.setCellulare(dipendente.getCellulare());
-			oldDipendente.setDataNascita(dipendente.getDataNascita());
-			oldDipendente.setEmail(dipendente.getEmail());
-			oldDipendente.setResidenza(dipendente.getResidenza());
-			oldDipendente.setDomicilio(dipendente.getDomicilio());
-			oldDipendente.setLuogoNascita(dipendente.getLuogoNascita());
-			oldDipendente.setEmAziendale(dipendente.getEmAziendale());
+			vecchioDipendente.setAzienda(dipendente.getAzienda());
+			vecchioDipendente.setNome(dipendente.getNome());
+			vecchioDipendente.setCognome(dipendente.getCognome());
+			vecchioDipendente.setCellulare(dipendente.getCellulare());
+			vecchioDipendente.setDataNascita(dipendente.getDataNascita());
+			vecchioDipendente.setEmail(dipendente.getEmail());
+			vecchioDipendente.setResidenza(dipendente.getResidenza());
+			vecchioDipendente.setDomicilio(dipendente.getDomicilio());
+			vecchioDipendente.setLuogoNascita(dipendente.getLuogoNascita());
+			vecchioDipendente.setEmAziendale(dipendente.getEmAziendale());
 			//System.out.println("*********** updated dipdendente " + oldDipendente + "**********************");
-			Azienda azienda = aziendaRepo.findById(aziendaId).get();
-			oldDipendente.setAzienda(azienda);
+			Azienda azienda = aziendaRepository.findById(aziendaId).get();
+			vecchioDipendente.setAzienda(azienda);
 			System.out.println("UPDATING DIPENDENTE");
-			return dipRepo.save(oldDipendente);
+			return dipendenteRepository.save(vecchioDipendente);
 
 		} else {
 			log.info("*******Dipendente non trovato!!*****");
@@ -94,15 +95,17 @@ public class DipendenteServiceImpl implements DipendenteService {
 	
 
 	@Override
-	public Optional<Dipendente> findDipendenteByCodiceFiscale(String codiceFiscale) {
+	public Optional<Dipendente> trovaDipendentePerCodiceFiscale(String codiceFiscale) {
 
-		return dipRepo.findById(codiceFiscale);
+		return dipendenteRepository.findById(codiceFiscale);
 	}
 
 	@Override
-	public List<Dipendente> findAllDipendenti() {
+	public List<Dipendente> trovaTuttiDipendenti() {
 		List<Dipendente> listaDipendenti = new ArrayList<Dipendente>();
-		listaDipendenti = dipRepo.findAll();
+		listaDipendenti = dipendenteRepository.findAll();
+		
+		log.info("Lista " + listaDipendenti.size());
 		
 		//get age from data di nascita
 		for(Dipendente dipendente : listaDipendenti) {
@@ -114,31 +117,20 @@ public class DipendenteServiceImpl implements DipendenteService {
 			long years = ChronoUnit.YEARS.between(start, end);
 			
 			dipendente.setAge(years);
+			log.info("Anni " + dipendente.getAge());
 		}
 
-		if (!listaDipendenti.isEmpty()) {
-			log.info("La lista di dipendenti e' piena");
-			return listaDipendenti;
-		} else {
-			log.info("la lista dei dipendenti e' vuota");
-		}
-		return null;
+		return listaDipendenti;
 	}
 
 
 
 	@Override
-	public Dipendente archiveDipendente(String codiceFiscale) {
+	public Dipendente archiviaDipendente(String codiceFiscale) {
 
-		Dipendente dipendenteToArchive = dipRepo.findById(codiceFiscale).get();
-		dipendenteToArchive.setActive((byte) 0);
-		return dipRepo.save(dipendenteToArchive);
-	}
-
-	@Override
-	public List<Dipendente> findAllDipendentes() {
-		// TODO Auto-generated method stub
-		return null;
+		Dipendente dipendenteDaArchiviare = dipendenteRepository.findById(codiceFiscale).get();
+		dipendenteDaArchiviare.setActive((byte) 0);
+		return dipendenteRepository.save(dipendenteDaArchiviare);
 	}
 	
 

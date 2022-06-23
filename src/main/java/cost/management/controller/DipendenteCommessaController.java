@@ -13,18 +13,18 @@ import cost.management.entities.DipendenteCommessa;
 import cost.management.service.DipendenteCommessaService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/dipendente-commessa-service")
 @CrossOrigin(origins = "http://localhost:4200")
 public class DipendenteCommessaController {
 
 	@Autowired
-	private DipendenteCommessaService dipCommService;
+	private DipendenteCommessaService dipendenteCommessaService;
 
-	@PostMapping("/dipendentecommessa/{commessaCodice}" )
-	public DipendenteCommessa addDipendenteCommessa(@RequestBody DipendenteCommessa dipCommessa,
+	@PostMapping("/dipendenti-commesse/{commessaCodice}" )
+	public DipendenteCommessa inserisciDipendenteCommessa(@RequestBody DipendenteCommessa dipendenteCommessa,
 			@PathVariable String commessaCodice ) {
 		
-		dipCommessa.getId().setCommessaCodice(commessaCodice);
+		dipendenteCommessa.getId().setCommessaCodice(commessaCodice);
 		//@PathVariable String commessaCodice, @PathVariable String dipendenteCF
 		//{commessaCodice}/{dipendenteCF}
 		//DipendenteCommessa dipCommessa = new DipendenteCommessa();
@@ -34,8 +34,8 @@ public class DipendenteCommessaController {
 		//System.out.println("DIP COMMESSA IMPORTO :");
 		//System.out.println("DIP COMMESSA DATA INIZIO ATTIVITA :"+ dipCommessa.getDataInizioAttivita());
 		//System.out.println("DIP COMMESSA DATA FINE ATTIVITA :"+ dipCommessa.getDataFineAttivita());
-		System.out.println("ID  DIPENDENTE CF :"+ dipCommessa.getId().getDipendenteCodiceFiscale());
-		System.out.println( "tariffa gg :"+dipCommessa.getTariffaGg());
+		System.out.println("ID  DIPENDENTE CF :"+ dipendenteCommessa.getId().getDipendenteCodiceFiscale());
+		System.out.println( "tariffa gg :"+dipendenteCommessa.getTariffaGg());
 		
 		//String tariffaGg = Float.parseFloat(dipCommessa.getTariffaGg());
 		//double tariffaGG = Double.parseDouble(dipCommessa.getTariffaGg());
@@ -44,7 +44,7 @@ public class DipendenteCommessaController {
 
 		//System.out.println("OGGETTO DIPEDNETECOMEESSA ID - dipendente CF: "+ dipCommessa.getId().getDipendenteCodiceFiscale().toString());
 
-		return dipCommService.addDipendenteCommessa(dipCommessa);
+		return dipendenteCommessaService.inserisciDipendenteCommessa(dipendenteCommessa);
 	}
 
 }

@@ -18,7 +18,7 @@ import cost.management.entities.Commessa;
 import cost.management.service.CommessaService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/commessa-service")
 //to cross origin to a REACT project use "http://localhost:3000"
 @CrossOrigin(origins = "http://localhost:4200")
 public class CommessaController {
@@ -29,7 +29,7 @@ public class CommessaController {
 	private CommessaService commessaService;
 	
 	@PostMapping("/commesse")
-	private Commessa addCommessa(@RequestBody Commessa commessa) {
+	private Commessa inserisciCommessa(@RequestBody Commessa commessa) {
 		System.out.println("###### INSIDE COMMESSE CONTROLLER");
 		System.out.println(commessa.getDescrizioneCommessa());
 		System.out.println(commessa.getCodice());
@@ -41,43 +41,43 @@ public class CommessaController {
 		System.out.println(commessa.getCliente());
 
 
-		return commessaService.addCommessa(commessa);
+		return commessaService.inserisciCommessa(commessa);
 		
 	}
 	
 	@GetMapping("/commesse")
-	public List<Commessa> findAllCommesse() {
+	public List<Commessa> trovaTutteCommesse() {
 		System.out.println("INSIDE FIND ALL COMMESSE");
-		return commessaService.findAll();
+		return commessaService.trovaTutteCommesse();
 	}
 	
 	@GetMapping("/commesse/{codice}")
-	public Commessa findByCodice(@PathVariable String codice) {
-		return commessaService.findByCodice(codice);
+	public Commessa trovaCommessaPerCodice(@PathVariable String codice) {
+		return commessaService.trovaCommessaPerCodice(codice);
 		
 	}
 	
 	@GetMapping("/commesse/codice/{codice}")
-	public List<Commessa> findByCodiceContaining(@PathVariable String codice) {
-		return commessaService.findByCodiceContaining(codice);
+	public List<Commessa> trovaPerCodiceContenente(@PathVariable String codice) {
+		return commessaService.trovaPerCodiceContenente(codice);
 	}
-	@GetMapping("/commesse/dc/{dc}")
-	public List<Commessa> findByDescrizioneCommessaContaining(@PathVariable String dc) {
-		return commessaService.findByDescrizioneCommessaContaining(dc);
+	@GetMapping("/commesse/descrizione-commessa/{descrizioneCommessa}")
+	public List<Commessa> trovaPerDescrizioneCommessaContenente(@PathVariable String descrizioneCommessa) {
+		return commessaService.trovaPerDescrizioneCommessaContenente(descrizioneCommessa);
 	}
 	
-	@GetMapping("/commesse/tc/{tc}")
-	public List<Commessa> findByTipologiaCommessaContaining(@PathVariable String tc) {
-		return commessaService.findByTipologiaCommessaContaining(tc);
+	@GetMapping("/commesse/tipologia-contratto/{tipologiaContratto}")
+	public List<Commessa> trovaPerTipologiaCommessaContenente(@PathVariable String tipologiaContratto) {
+		return commessaService.trovaPerTipologiaCommessaContenente(tipologiaContratto);
 	}
 	@PutMapping("/commesse/{codice}")
-	public Commessa archiveCommessa(@PathVariable String codice) {
-		return commessaService.archiveCommessa(codice);
+	public Commessa archiviaCommessa(@PathVariable String codice) {
+		return commessaService.archiviaCommessa(codice);
 	}
 	
 	@DeleteMapping("/commesse/{codice}")
-	public void deleteCommessa(@PathVariable String codice) {
-		commessaService.deleteCommessa(codice);
+	public void eliminaCommessa(@PathVariable String codice) {
+		commessaService.eliminaCommessa(codice);
 		
 	}
 }

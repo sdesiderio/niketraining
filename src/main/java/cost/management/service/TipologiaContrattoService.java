@@ -6,7 +6,7 @@ import cost.management.entities.TipologiaContratto;
 
 public interface TipologiaContrattoService {
 
-	TipologiaContratto addTipologiaContatto(TipologiaContratto contratto);
+	TipologiaContratto inserisciTipologiaContatto(TipologiaContratto contratto);
 	
-	List<TipologiaContratto> findAllContratto();
+	List<TipologiaContratto> trovaTuttiContratti();
 }

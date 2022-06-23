@@ -13,7 +13,7 @@ public class ContrattoServiceImpl implements ContrattoService {
 	private ContrattoRepository contrattoRepository;
 	
 	@Override
-	public Contratto addContratto(Contratto contratto) {
+	public Contratto inserisciContratto(Contratto contratto) {
 		return contrattoRepository.save(contratto);
 	}
 }

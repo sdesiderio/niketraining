@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +27,10 @@ import cost.management.service.TipologiaContrattoService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api")
+@RequestMapping("/api/contratto-service")
 public class ContrattiController {
+	
+	Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private DipendenteService dipendenteService;
@@ -38,30 +42,34 @@ public class ContrattiController {
 	private ContrattoService contrattoService;
 	
 	@GetMapping("/daticontratti")
-	public ArrayList<DatiContrattuali> getDatiContrattuali() {
+	public ArrayList<DatiContrattuali> RecuperaDatiContrattuali() {
 		
-		ArrayList<DatiContrattuali> daticontrattuali = new ArrayList<DatiContrattuali>();
+		ArrayList<DatiContrattuali> listaDatiContrattuali = new ArrayList<DatiContrattuali>();
 		
-		List<TipologiaContratto> tipologiecontratti = tipologiaContrattoService.findAllContratto();
+		List<TipologiaContratto> listaTipologieContratti = tipologiaContrattoService.trovaTuttiContratti();
 		
-		List<Dipendente> dipendentes = dipendenteService.findAllDipendentes();
+		log.info("Tipologia Contratti " + listaTipologieContratti.size());
 		
-		for (Dipendente dipendente : dipendentes) {
-			daticontrattuali.add(new DatiContrattuali(dipendente.getCodiceFiscale(),
+		List<Dipendente> listaDipendenti = dipendenteService.trovaTuttiDipendenti();
+		
+		log.info("Lista Dipendenti " + listaDipendenti.size());
+		
+		for (Dipendente dipendente : listaDipendenti) {
+			listaDatiContrattuali.add(new DatiContrattuali(dipendente.getCodiceFiscale(),
 					dipendente.getAzienda().getNome(),
 					dipendente.getNome(),
 					dipendente.getCognome(),
-					tipologiecontratti));
+					listaTipologieContratti));
 		}
 		
-		return daticontrattuali;
+		return listaDatiContrattuali;
 		
 	}
 	
 	@PostMapping("/insertcontratto")
-	public Contratto addConratto(@RequestBody Contratto contratto)
+	public Contratto inserisciContratto(@RequestBody Contratto contratto)
 	{
-		return contrattoService.addContratto(contratto);
+		return contrattoService.inserisciContratto(contratto);
 	}
 
 }

@@ -15,63 +15,63 @@ public class ClienteServiceImpl implements ClienteService {
 	private ClienteRepository clienteRepository;
 	
 	@Override
-	public Cliente findByPartitaIva(String partitaIva) {
+	public Cliente trovaPerPartitaIva(String partitaIva) {
 		return clienteRepository.findByPartitaIva(partitaIva);
 	}
 	@Override
-	public List<Cliente> findByPartitaIvaContaining(String partitaIva) {
+	public List<Cliente> trovaPerPartitaIvaContenente(String partitaIva) {
 		return clienteRepository.findByPartitaIvaContaining(partitaIva);
 	}
 	@Override
-	public List<Cliente> findByPecContaining(String pec) {
+	public List<Cliente> trovaPerPecContenente(String pec) {
 		return clienteRepository.findByPecContaining(pec);
 	}
 	@Override
-	public List<Cliente> findByRagioneSocialeContaining(String rs){
-		return clienteRepository.findByRagioneSocialeContaining(rs);
+	public List<Cliente> trovaPerRagioneSocialeContenente(String ragioneSociale){
+		return clienteRepository.findByRagioneSocialeContaining(ragioneSociale);
 	}
 	@Override
-	public List<Cliente> findAll(){
+	public List<Cliente> trovaTuttiClienti(){
 		return clienteRepository.findAll();
 	}
 	@Override
-	public List<Cliente> findByCodiceFiscaleContaining(String cf) {
-			return clienteRepository.findByCodiceFiscaleContaining(cf);
+	public List<Cliente> trovaPerCodiceFiscaleContenente(String codiceFiscale) {
+			return clienteRepository.findByCodiceFiscaleContaining(codiceFiscale);
 	
 	}
 	@Override
-	public List<Cliente> findByCodiceInterscambioContaining(String ci) {
-		return clienteRepository.findByCodiceInterscambioContaining(ci);
+	public List<Cliente> trovaPerCodiceInterscambioContenente(String codiceInterscambio) {
+		return clienteRepository.findByCodiceInterscambioContaining(codiceInterscambio);
 	}
 	
 	@Override
-	public Cliente addCliente(Cliente cli) {
-		return clienteRepository.save(cli);
+	public Cliente inserisciCliente(Cliente cliente) {
+		return clienteRepository.save(cliente);
 	}
 	
 	@Override
-	public Cliente updateCliente(Cliente cli,String id) {
+	public Cliente aggiornaCliente(Cliente cliente,String id) {
 		if(isValidId(id)) {
-			cli.setPartitaIva(id);
-			Cliente clienteToUpdate = findByPartitaIva(id);
-			clienteToUpdate.setRagioneSociale(cli.getRagioneSociale());
-			clienteToUpdate.setIndirizzo(cli.getIndirizzo());
-			clienteToUpdate.setNCivico(cli.getNCivico());
-			clienteToUpdate.setCitta(cli.getCitta());
-			clienteToUpdate.setProvincia(cli.getProvincia());
-			clienteToUpdate.setCap(cli.getCap());
-			clienteToUpdate.setStato(cli.getStato());
-			clienteToUpdate.setPartitaIva(cli.getPartitaIva());
-			clienteToUpdate.setCodiceFiscale(cli.getCodiceFiscale());
-			clienteToUpdate.setCodiceInterscambio(cli.getCodiceInterscambio());
-			clienteToUpdate.setPec(cli.getPec());
+			cliente.setPartitaIva(id);
+			Cliente clienteToUpdate = trovaPerPartitaIva(id);
+			clienteToUpdate.setRagioneSociale(cliente.getRagioneSociale());
+			clienteToUpdate.setIndirizzo(cliente.getIndirizzo());
+			clienteToUpdate.setNCivico(cliente.getNCivico());
+			clienteToUpdate.setCitta(cliente.getCitta());
+			clienteToUpdate.setProvincia(cliente.getProvincia());
+			clienteToUpdate.setCap(cliente.getCap());
+			clienteToUpdate.setStato(cliente.getStato());
+			clienteToUpdate.setPartitaIva(cliente.getPartitaIva());
+			clienteToUpdate.setCodiceFiscale(cliente.getCodiceFiscale());
+			clienteToUpdate.setCodiceInterscambio(cliente.getCodiceInterscambio());
+			clienteToUpdate.setPec(cliente.getPec());
 			
 			return clienteRepository.save(clienteToUpdate);
 		}return null;
 	}
 	
 	@Override
-	public Cliente archiveCliente(String id) {
+	public Cliente archiviaCliente(String id) {
 		Cliente clienteToArchive = clienteRepository.findByPartitaIva(id);
 		clienteToArchive.setActive((byte)0);
 		return clienteRepository.save(clienteToArchive);

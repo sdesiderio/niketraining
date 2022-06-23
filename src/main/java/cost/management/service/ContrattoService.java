@@ -4,6 +4,6 @@ import cost.management.entities.Contratto;
 
 public interface ContrattoService {
 
-	Contratto addContratto(Contratto contratto);
+	Contratto inserisciContratto(Contratto contratto);
 
 }

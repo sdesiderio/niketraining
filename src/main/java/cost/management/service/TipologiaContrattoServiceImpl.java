@@ -16,12 +16,12 @@ public class TipologiaContrattoServiceImpl implements TipologiaContrattoService 
 	private TipologiaContrattoRepository tipologiaContrattoRepository;
 	
 	@Override
-	public TipologiaContratto addTipologiaContatto(TipologiaContratto contratto) {
+	public TipologiaContratto inserisciTipologiaContatto(TipologiaContratto contratto) {
 		return tipologiaContrattoRepository.save(contratto);
 	}
 	
 	@Override
-	public List<TipologiaContratto> findAllContratto() {
+	public List<TipologiaContratto> trovaTuttiContratti() {
 		return tipologiaContrattoRepository.findAll();
 	}
 

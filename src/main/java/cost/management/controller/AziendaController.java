@@ -15,7 +15,7 @@ import cost.management.entities.Azienda;
 import cost.management.service.AziendaService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/azienda-service")
 //to cross origin to a REACT project use "http://localhost:3000"
 @CrossOrigin(origins = "http://localhost:4200")
 public class AziendaController {
@@ -28,26 +28,26 @@ public class AziendaController {
 	
 	
 	@GetMapping("/aziende")
-	public List<Azienda> findAllAziende(){
+	public List<Azienda> trovaTutteAziende(){
 		System.out.println("INSIDE TEST CONTROLLER FIND ALL AZIENDE");
-		List<Azienda> aziende = new ArrayList<Azienda>();
-		aziende = aziendaService.findAllAziende();
-		System.out.println("AZIENDE: " +aziende.toString());
-		return aziende;
+		List<Azienda> listaAziende = new ArrayList<Azienda>();
+		listaAziende = aziendaService.trovaTutteAziende();
+		System.out.println("AZIENDE: " +listaAziende.toString());
+		return listaAziende;
 	}
 	
 	@GetMapping("/aziende/nome")
-	public Azienda findAziendaByName() {
+	public Azienda trovaAziendaPerId() {
 		System.out.println("INSIDE TEST CONTROLLER FIND  AZIENDE BY NOME");
-		return aziendaService.findAziendaByNome(nomeAzienda);
+		return aziendaService.trovaAziendaPerId(nomeAzienda);
 		
 	}
 	
-	@GetMapping("/aziende/{id}")
-	public Azienda findAziendaById(@PathVariable String id) {
+	@GetMapping("/aziende/{aziendaNome}")
+	public Azienda trovaAziendaPerNome(@PathVariable String aziendaNome) {
 		//System.out.println("RETURN AZIENDA OBJ BACK END :" + aziendaService.findAziendaById(id));
 		//System.out.println("INSIDE FIND BY ID");
-		return aziendaService.findAziendaById(id);
+		return aziendaService.trovaAziendaPerNome(aziendaNome);
 		
 	}
 	

@@ -5,6 +5,6 @@ import cost.management.entities.DipendenteCommessa;
 public interface DipendenteCommessaService {
 
 
-	DipendenteCommessa addDipendenteCommessa(DipendenteCommessa dipendenteCommessa);
+	DipendenteCommessa inserisciDipendenteCommessa(DipendenteCommessa dipendenteCommessa);
 
 }

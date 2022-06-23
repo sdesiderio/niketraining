@@ -8,15 +8,13 @@ import cost.management.entities.Dipendente;
 
 public interface DipendenteService {
 
-	Dipendente addDipendente(Dipendente dipendente, int id);
+	Dipendente inserisciDipendente(Dipendente dipendente, int id);
 
-	List<Dipendente> findAllDipendenti();
+	List<Dipendente> trovaTuttiDipendenti();
 
-	Dipendente updateDipendente(Dipendente dipendente, String codiceFiscale, int aziendaId);
+	Dipendente aggiornaDipendente(Dipendente dipendente, String codiceFiscale, int aziendaId);
 
-	Optional<Dipendente> findDipendenteByCodiceFiscale(String codiceFiscale);
+	Optional<Dipendente> trovaDipendentePerCodiceFiscale(String codiceFiscale);
 
-	Dipendente archiveDipendente(String codiceFiscale);
-	
-	List<Dipendente> findAllDipendentes();
+	Dipendente archiviaDipendente(String codiceFiscale);
 }

@@ -7,23 +7,23 @@ import cost.management.entities.Commessa;
 
 public interface CommessaService {
 
-	Commessa findByCodice(String codice);
+	Commessa trovaCommessaPerCodice(String codice);
 
-	List<Commessa> findByCodiceContaining(String codice);
+	List<Commessa> trovaPerCodiceContenente(String codice);
 
-	List<Commessa> findAll();
+	List<Commessa> trovaTutteCommesse();
 
-	List<Commessa> findByDescrizioneCommessaContaining(String dc);
+	List<Commessa> trovaPerDescrizioneCommessaContenente(String descrizioneCommessa);
 
-	List<Commessa> findByTipologiaCommessaContaining(String tc);
+	List<Commessa> trovaPerTipologiaCommessaContenente(String tipologiaCommessa);
 
-	Commessa addCommessa(Commessa com);
+	Commessa inserisciCommessa(Commessa commessa);
 
-	Commessa updateCommessa(Commessa com, String codice);
+	Commessa aggiornaCommessa(Commessa commessa, String codice);
 
-	Commessa archiveCommessa(String codice);
+	Commessa archiviaCommessa(String codice);
 	
-	void deleteCommessa(String id);
+	void eliminaCommessa(String id);
 
 	
 

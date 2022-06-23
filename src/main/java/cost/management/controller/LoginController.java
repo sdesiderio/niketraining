@@ -16,30 +16,30 @@ import cost.management.service.LoginService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api")
+@RequestMapping("/api/login-service")
 public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
 	
-	@PostMapping("/registration")
-	public Utente addUtente(@Valid @RequestBody Utente utente)
+	@PostMapping("/registrazioni")
+	public Utente inserisciUtente(@Valid @RequestBody Utente utente)
 	{
-		Utente findUtente = loginService.finUtenteByEmail(utente.getEmail());
-		if (findUtente==null) {		
-			return loginService.addUtente(utente);
+		Utente trovaUtente = loginService.trovaUtentePerEmail(utente.getEmail());
+		if (trovaUtente==null) {		
+			return loginService.inserisciUtente(utente);
 		}
 		return null;
 	}
 	
 	@PostMapping("/login")
-	public boolean checkUtente(@Valid @RequestBody Utente utente)
+	public boolean verificaUtente(@Valid @RequestBody Utente utente)
 	{
-		Utente utenteReal = loginService.finUtenteByEmail(utente.getEmail());
-		if (utenteReal == null) {
+		Utente utenteReale = loginService.trovaUtentePerEmail(utente.getEmail());
+		if (utenteReale == null) {
 			return false;
 		}
-		if (utente.getPassword().equals(utenteReal.getPassword())) {
+		if (utente.getPassword().equals(utenteReale.getPassword())) {
 			return true;
 		}
 		return false;
