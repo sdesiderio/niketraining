@@ -70,9 +70,15 @@ public class CommessaController {
 	public List<Commessa> trovaPerTipologiaCommessaContenente(@PathVariable String tipologiaContratto) {
 		return commessaService.trovaPerTipologiaCommessaContenente(tipologiaContratto);
 	}
-	@PutMapping("/commesse/{codice}")
+	@PutMapping("/commesse/archivia/{codice}")
 	public Commessa archiviaCommessa(@PathVariable String codice) {
 		return commessaService.archiviaCommessa(codice);
+	}
+	
+	@PutMapping("/commesse/{codice}")
+	public Commessa aggiornaCommessa(@RequestBody Commessa com,@PathVariable String codice) {
+		return commessaService.aggiornaCommessa(com, codice);
+		
 	}
 	
 	@DeleteMapping("/commesse/{codice}")
