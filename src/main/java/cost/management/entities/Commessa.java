@@ -23,6 +23,7 @@ public class Commessa implements Serializable {
 	@Id
 	private String codice;
 
+	@Column(name="active")
 	private byte active;
 
 	@Temporal(TemporalType.DATE)
