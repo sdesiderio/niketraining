@@ -46,7 +46,7 @@ public class ClienteController {
 		return clienteService.trovaPerCodiceFiscaleContenente(codiceFiscale);
 	}
 	
-	@GetMapping("/clienti/codice-interscamio/{codiceInterscambio}")
+	@GetMapping("/clienti/codice-interscambio/{codiceInterscambio}")
 	public List<Cliente> trovaPerCodiceInterscambioContenente(@PathVariable String codiceInterscambio) {
 		return clienteService.trovaPerCodiceInterscambioContenente(codiceInterscambio);
 	}
@@ -76,7 +76,7 @@ public class ClienteController {
 		return clienteService.aggiornaCliente(cliente,partitaIva);
 	}
 		
-	@PutMapping("/clientiToArchive/{partitaIva}")
+	@PutMapping("/clienti/archivia/{partitaIva}")
 	public Cliente archiviaCliente(@Valid @PathVariable String partitaIva) {
 		return clienteService.archiviaCliente(partitaIva);
 	}
