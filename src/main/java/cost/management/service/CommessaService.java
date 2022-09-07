@@ -24,6 +24,20 @@ public interface CommessaService {
 	Commessa archiviaCommessa(String codice);
 	
 	void eliminaCommessa(String id);
+	
+	public List<String> trovaDipendentiPerCommessa(Commessa commessa);
+	
+	List<Commessa> trovaCommessaPerCliente(Cliente cliente);
+	
+	List<Commessa> trovaCommessaPerCliente(Cliente cliente, String nominativo);
+	
+	List<Commessa> trovaCommessaPerDataFineCommessaAttuali();
+	
+	List<Commessa> trovaCommessaPerDataFineCommessaStorico();
+	
+	public List<Commessa> confrontaCommessaPerDataFineCommessaAttuali(Commessa commessa);
+	
+	public List<Commessa> confrontaCommessaPerDataFineCommessaStorico(Commessa commessa);
 
 	
 

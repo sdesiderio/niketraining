@@ -25,7 +25,7 @@ public class TipologiaContrattoController {
 	private TipologiaContrattoService tipologiaContrattoService;
 	
 	@PostMapping("/tipologie-contratto")
-	public boolean inserisciTipologiaContatto(@RequestBody TipologiaContratto contratto)
+	public boolean inserisciTipologiaContratto(@RequestBody TipologiaContratto contratto)
 	{
 		//DONE  controllo se tipologia di contratto gia esiste su db (con findALL)  return boolean
 		List<TipologiaContratto> contratti = tipologiaContrattoService.trovaTuttiContratti();
@@ -34,13 +34,13 @@ public class TipologiaContrattoController {
 				return false;
 			}
 		}
-		tipologiaContrattoService.inserisciTipologiaContatto(contratto);
+		tipologiaContrattoService.inserisciTipologiaContratto(contratto);
 		return true;
 	}
 
 	
 	@GetMapping("/tipologie-contratto")
-	public List<TipologiaContratto> findAllTipologiaContrattos()
+	public List<TipologiaContratto> trovaTuttiContratti()
 	{
 		return tipologiaContrattoService.trovaTuttiContratti();
 	}

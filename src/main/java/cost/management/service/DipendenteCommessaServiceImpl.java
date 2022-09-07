@@ -1,6 +1,7 @@
 package cost.management.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,12 @@ public class DipendenteCommessaServiceImpl implements DipendenteCommessaService 
 		return null;
 		
 		
+	}
+
+
+	@Override
+	public List<DipendenteCommessa> trovaTuttiDipendenteCommesse() {
+		return dipendenteCommessaRepository.findAll();
 	}
 	
 }

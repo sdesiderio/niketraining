@@ -17,6 +17,7 @@ public class Contratto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private byte active;
@@ -47,7 +48,6 @@ public class Contratto implements Serializable {
 	private Dipendente dipendente;
 
 	//bi-directional many-to-one association to TipologiaContratto
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="tipologia_contratto")
 	private TipologiaContratto tipologiaContrattoBean;

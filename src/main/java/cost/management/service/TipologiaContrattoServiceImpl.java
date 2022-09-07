@@ -16,7 +16,7 @@ public class TipologiaContrattoServiceImpl implements TipologiaContrattoService 
 	private TipologiaContrattoRepository tipologiaContrattoRepository;
 	
 	@Override
-	public TipologiaContratto inserisciTipologiaContatto(TipologiaContratto contratto) {
+	public TipologiaContratto inserisciTipologiaContratto(TipologiaContratto contratto) {
 		return tipologiaContrattoRepository.save(contratto);
 	}
 	

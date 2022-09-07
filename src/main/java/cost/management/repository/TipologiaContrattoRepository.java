@@ -8,6 +8,6 @@ import cost.management.entities.TipologiaContratto;
 
 @Repository
 @Transactional
-public interface TipologiaContrattoRepository extends JpaRepository<TipologiaContratto, Long>{
+public interface TipologiaContrattoRepository extends JpaRepository<TipologiaContratto, Integer>{
 
 }

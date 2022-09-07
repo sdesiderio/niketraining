@@ -45,7 +45,7 @@ public class Commessa implements Serializable {
 
 	//bi-directional many-to-one association to Cliente
 	@ManyToOne
-	@JsonBackReference(value="commesse-cliente")
+	//@JsonBackReference(value="commesse-cliente")
 	private Cliente cliente;
 
 	//bi-directional many-to-one association to DipendenteCommessa

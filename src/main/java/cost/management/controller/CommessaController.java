@@ -86,4 +86,29 @@ public class CommessaController {
 		commessaService.eliminaCommessa(codice);
 		
 	}
-}
+	
+	@PostMapping("/commesse-dipendenti")
+	public List<String> trovaDipendentiPerCommessa(@RequestBody Commessa commessa){
+		return commessaService.trovaDipendentiPerCommessa(commessa);
+	}
+	
+	@PostMapping("/commesse-clienti")
+	public List<Commessa> trovaCommessaPerCliente(@RequestBody Cliente cliente){
+		return commessaService.trovaCommessaPerCliente(cliente);
+	}
+	
+	@PostMapping("/commesse-clienti/{nominativo}")
+	public List<Commessa> trovaCommessaPerClienteNominativo(@RequestBody Cliente cliente,@PathVariable String nominativo){
+		return commessaService.trovaCommessaPerCliente(cliente,nominativo);
+	}
+	
+	@PostMapping("/commesse-attuali")
+	public List<Commessa> confrontaCommessaPerDataFineCommessaAttuali(@RequestBody Commessa commessa){
+		return commessaService.confrontaCommessaPerDataFineCommessaAttuali(commessa);
+	}
+	
+	@PostMapping("/commesse-storico")
+	public List<Commessa> confrontaCommessaPerDataFineCommessaStorico(@RequestBody Commessa commessa){
+		return commessaService.confrontaCommessaPerDataFineCommessaStorico(commessa);
+	}
+	}
