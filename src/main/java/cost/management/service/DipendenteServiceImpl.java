@@ -18,8 +18,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cost.management.entities.Azienda;
+import cost.management.entities.Commessa;
 import cost.management.entities.Dipendente;
+import cost.management.entities.DipendenteBean;
+import cost.management.entities.DipendenteCommessa;
 import cost.management.repository.AziendaRepository;
+import cost.management.repository.CommessaRepository;
 import cost.management.repository.DipendenteRepository;
 
 @Service
@@ -30,9 +34,12 @@ public class DipendenteServiceImpl implements DipendenteService {
 	// inietta il repository nel service
 	@Autowired
 	private DipendenteRepository dipendenteRepository;
-
+	
 	@Autowired
 	private AziendaRepository aziendaRepository;
+	
+	@Autowired
+	private CommessaRepository commessaRepository;
 
 	// aggiungi dipendente
 	@Override
@@ -131,6 +138,49 @@ public class DipendenteServiceImpl implements DipendenteService {
 		Dipendente dipendenteDaArchiviare = dipendenteRepository.findById(codiceFiscale).get();
 		dipendenteDaArchiviare.setActive((byte) 0);
 		return dipendenteRepository.save(dipendenteDaArchiviare);
+	}
+
+	@Override
+	public List<DipendenteBean> trovaTuttiDipendentiBean() {
+		List<Dipendente> dipendenti = new ArrayList<Dipendente>();
+		List<DipendenteCommessa> dipendentiCommesse = new ArrayList<DipendenteCommessa>();
+		List<DipendenteBean> dipendentiBean = new ArrayList<DipendenteBean>();
+		String partitaIva = null;
+		String codice = null;
+		dipendenti = dipendenteRepository.findAll();
+		for (Dipendente dipendente : dipendenti) {
+
+			DipendenteBean dipendenteBean = new DipendenteBean();
+			
+			Commessa commessa = new Commessa();
+
+			dipendentiCommesse = dipendente.getDipendenteCommesse();
+
+				dipendenteBean.setCodiceFiscale(dipendente.getCodiceFiscale());
+				dipendenteBean.setAzienda(dipendente.getAzienda());
+				dipendenteBean.setNome(dipendente.getNome());
+				dipendenteBean.setCognome(dipendente.getCognome());
+				dipendenteBean.setCellulare(dipendente.getCellulare());
+				dipendenteBean.setDataNascita(dipendente.getDataNascita());
+				dipendenteBean.setEmail(dipendente.getEmail());
+				dipendenteBean.setResidenza(dipendente.getResidenza());
+				dipendenteBean.setDomicilio(dipendente.getDomicilio());
+				dipendenteBean.setLuogoNascita(dipendente.getLuogoNascita());
+				dipendenteBean.setEmAziendale(dipendente.getEmAziendale());
+				dipendenteBean.setDipendenteCommesse(dipendentiCommesse);
+
+				for (DipendenteCommessa dipendenteCommessa : dipendentiCommesse) {
+
+				codice = dipendenteCommessa.getId().getCommessaCodice();
+				commessa = commessaRepository.findByCodice(codice);
+
+				dipendenteBean.setCommessa(commessa);
+
+				dipendentiBean.add(dipendenteBean);
+
+			}
+		}
+		return dipendentiBean;
 	}
 	
 

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import cost.management.entities.Azienda;
 import cost.management.entities.Dipendente;
+import cost.management.entities.DipendenteBean;
 
 public interface DipendenteService {
 
@@ -17,4 +18,6 @@ public interface DipendenteService {
 	Optional<Dipendente> trovaDipendentePerCodiceFiscale(String codiceFiscale);
 
 	Dipendente archiviaDipendente(String codiceFiscale);
+	
+	List<DipendenteBean> trovaTuttiDipendentiBean();
 }

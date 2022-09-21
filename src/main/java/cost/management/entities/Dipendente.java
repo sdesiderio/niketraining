@@ -59,7 +59,7 @@ public class Dipendente implements Serializable {
 	
 
 	//bi-directional many-to-one association to Contratto
-	@JsonIgnore
+	@JsonManagedReference
 	@OneToMany(mappedBy="dipendente")
 	private List<Contratto> contratti = new ArrayList<>();
 

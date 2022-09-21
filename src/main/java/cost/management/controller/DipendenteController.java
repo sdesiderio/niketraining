@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cost.management.entities.Dipendente;
+import cost.management.entities.DipendenteBean;
 import cost.management.service.DipendenteService;
 
 @RestController
@@ -76,8 +77,11 @@ public class DipendenteController {
 	public Dipendente archiviaDipendente(@PathVariable String codiceFiscale) {
 		
 		return dipendenteService.archiviaDipendente(codiceFiscale);
-		
-		
+	}
+	
+	@GetMapping("/dipendenti/dipendente")
+	public List<DipendenteBean> trovaTuttiDipendentiBean() {
+		return dipendenteService.trovaTuttiDipendentiBean();
 	}
 
 }

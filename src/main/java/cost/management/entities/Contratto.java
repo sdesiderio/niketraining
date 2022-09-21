@@ -3,6 +3,8 @@ package cost.management.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -45,6 +47,7 @@ public class Contratto implements Serializable {
 
 	//bi-directional many-to-one association to Dipendente
 	@ManyToOne
+	@JsonBackReference
 	private Dipendente dipendente;
 
 	//bi-directional many-to-one association to TipologiaContratto
