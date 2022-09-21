@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -181,6 +182,28 @@ public class DipendenteServiceImpl implements DipendenteService {
 			}
 		}
 		return dipendentiBean;
+	}
+
+	@Override
+	public Dipendente aggiornaDipendenteData(Date data, String codiceFiscale) {
+
+		Dipendente dipendenteRecuperato = null;
+		List<DipendenteCommessa> dipendenteCommesse = new ArrayList<>();
+
+		dipendenteRecuperato = dipendenteRepository.findByCodiceFiscale(codiceFiscale);
+
+		dipendenteCommesse = dipendenteRecuperato.getDipendenteCommesse();
+
+		Iterator<DipendenteCommessa> it = dipendenteCommesse.iterator();
+		while (it.hasNext()) {
+			DipendenteCommessa value = it.next();
+			if (value.getDataFineAttivita() == null) {
+				value.setDataFineAttivita(data);
+			}
+		}
+		dipendenteRecuperato.setDipendenteCommesse(dipendenteCommesse);
+
+		return dipendenteRepository.save(dipendenteRecuperato);
 	}
 	
 

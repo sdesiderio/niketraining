@@ -1,5 +1,6 @@
 package cost.management.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +21,7 @@ public interface DipendenteService {
 	Dipendente archiviaDipendente(String codiceFiscale);
 	
 	List<DipendenteBean> trovaTuttiDipendentiBean();
+	
+	Dipendente aggiornaDipendenteData(Date data, String codiceFiscale);
+	
 }

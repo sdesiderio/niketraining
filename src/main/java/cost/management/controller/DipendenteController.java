@@ -1,6 +1,7 @@
 package cost.management.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,6 +84,13 @@ public class DipendenteController {
 	@GetMapping("/dipendenti/dipendente")
 	public List<DipendenteBean> trovaTuttiDipendentiBean() {
 		return dipendenteService.trovaTuttiDipendentiBean();
+	}
+	
+	@PutMapping("/dipendenti/data/{data}/{codiceFiscale}")
+	public Dipendente aggiornaDipendenteData(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date data, @PathVariable String codiceFiscale) {
+		//System.out.println("INSIDE UPDATE METHOD CONTROLLER");
+		//System.out.println("CODICE FISCALE :"+ codiceFiscale +"AZIENDAID :"+ aziendaId);
+		return dipendenteService.aggiornaDipendenteData(data, codiceFiscale);
 	}
 
 }
