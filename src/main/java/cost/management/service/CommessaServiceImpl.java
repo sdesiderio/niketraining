@@ -13,6 +13,7 @@ import cost.management.entities.Cliente;
 import cost.management.entities.Commessa;
 import cost.management.entities.Dipendente;
 import cost.management.entities.DipendenteCommessa;
+import cost.management.repository.ClienteRepository;
 import cost.management.repository.CommessaRepository;
 import cost.management.repository.DipendenteRepository;
 @Service
@@ -25,6 +26,9 @@ public class CommessaServiceImpl implements CommessaService {
 	
 	@Autowired
 	private DipendenteRepository dipendenteRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
 	
 	
 	@Override
@@ -186,6 +190,17 @@ public class CommessaServiceImpl implements CommessaService {
 			}
 		}
 		return commesse;
+	}
+	
+	@Override
+	public Commessa aggiornaCommessaCliente(String cliente, String codice) {
+		Commessa commessaToUpdate = trovaCommessaPerCodice(codice);
+		Cliente clienteRecuperato = null;
+		
+		clienteRecuperato = clienteRepository.findByPartitaIva(cliente);
+		commessaToUpdate.setCliente(clienteRecuperato);
+		
+		return commessaRepository.save(commessaToUpdate);
 	}
 
 }

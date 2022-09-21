@@ -111,4 +111,9 @@ public class CommessaController {
 	public List<Commessa> confrontaCommessaPerDataFineCommessaStorico(@RequestBody Commessa commessa){
 		return commessaService.confrontaCommessaPerDataFineCommessaStorico(commessa);
 	}
+	
+	@PutMapping("/commesse/cliente/{cliente}/{codice}")
+	public Commessa aggiornaCommessaCliente(@PathVariable String cliente,@PathVariable String codice) {
+		return commessaService.aggiornaCommessaCliente(cliente, codice);
+	}
 	}

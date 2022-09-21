@@ -38,6 +38,8 @@ public interface CommessaService {
 	public List<Commessa> confrontaCommessaPerDataFineCommessaAttuali(Commessa commessa);
 	
 	public List<Commessa> confrontaCommessaPerDataFineCommessaStorico(Commessa commessa);
+	
+	Commessa aggiornaCommessaCliente(String cliente, String codice);
 
 	
 
