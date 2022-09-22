@@ -206,6 +206,55 @@ public class DipendenteServiceImpl implements DipendenteService {
 		return dipendenteRepository.save(dipendenteRecuperato);
 	}
 	
+	@Override
+	public List<DipendenteBean> confrontaDipendentePerDataFineAttivitaAttuali(DipendenteBean dipendenteBean) {
 
+		List<DipendenteBean> dipendentiBean = new ArrayList<>();
 
+		List<DipendenteCommessa> dipendenteCommesse = new ArrayList<>();
+
+		dipendenteCommesse = dipendenteBean.getDipendenteCommesse();
+		
+		for (DipendenteCommessa dipendenteCommessa : dipendenteCommesse) {
+			
+			Date dataFineAttivita = dipendenteCommessa.getDataFineAttivita();
+			
+			if (dataFineAttivita != null) {
+				Date date = new Date();
+				
+				if (dataFineAttivita.after(date)) {
+					dipendentiBean.add(dipendenteBean);
+				} else {
+				}
+			} else {
+				dipendentiBean.add(dipendenteBean);
+			}
+		}
+		return dipendentiBean;
+	}
+
+	@Override
+	public List<DipendenteBean> confrontaDipendentePerDataFineAttivitaStorico(DipendenteBean dipendenteBean) {
+		List<DipendenteBean> dipendentiBean = new ArrayList<>();
+
+		List<DipendenteCommessa> dipendenteCommesse = new ArrayList<>();
+
+		dipendenteCommesse = dipendenteBean.getDipendenteCommesse();
+
+		Iterator<DipendenteCommessa> it = dipendenteCommesse.iterator();
+		while (it.hasNext()) {
+			DipendenteCommessa value = it.next();
+			Date dataFineAttivita = value.getDataFineAttivita();
+			
+			if (dataFineAttivita != null) {
+				Date date = new Date();
+				
+				if (dataFineAttivita.before(date)) {
+					dipendentiBean.add(dipendenteBean);
+				}
+			}
+		}
+		return dipendentiBean;
+	}
+	
 }

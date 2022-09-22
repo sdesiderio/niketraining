@@ -24,4 +24,8 @@ public interface DipendenteService {
 	
 	Dipendente aggiornaDipendenteData(Date data, String codiceFiscale);
 	
+	public List<DipendenteBean> confrontaDipendentePerDataFineAttivitaAttuali(DipendenteBean dipendenteBean);
+	
+	public List<DipendenteBean> confrontaDipendentePerDataFineAttivitaStorico(DipendenteBean dipendenteBean);
+	
 }

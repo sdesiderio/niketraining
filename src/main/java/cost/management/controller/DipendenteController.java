@@ -92,5 +92,17 @@ public class DipendenteController {
 		//System.out.println("CODICE FISCALE :"+ codiceFiscale +"AZIENDAID :"+ aziendaId);
 		return dipendenteService.aggiornaDipendenteData(data, codiceFiscale);
 	}
+	
+	@PostMapping("/dipendenti/attuali")
+	public List<DipendenteBean> confrontaDipendentePerDataFineAttivitaAttuali(@RequestBody DipendenteBean dipendenteBean) { 
+		return dipendenteService.confrontaDipendentePerDataFineAttivitaAttuali(dipendenteBean);
+
+	}
+	
+	@PostMapping("/dipendenti/storico")
+	public List<DipendenteBean> confrontaDipendentePerDataFineAttivitaStorico(@RequestBody DipendenteBean dipendenteBean) { 
+		return dipendenteService.confrontaDipendentePerDataFineAttivitaStorico(dipendenteBean);
+
+	}
 
 }
